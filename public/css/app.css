@@ -10928,3 +10928,13 @@ a.text-dark:focus {
   }
 }
 
+body {
+  text-align: center;
+  font-family: Vazir;
+}
+
+.row {
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+}
+
