@@ -1,26 +1,24 @@
-@extends('layouts.app')
+@extends('layouts.cms')
 
-@section('content')
-<style>
-main{
-     background-image: url("/img/back1.jpg");
+@section('body')
     
- }
-</style>
-<div class="px-4 ">
-    <div class="row">
-        <div class="col-lg-9">
-            <div class="card" >
-                <div class="card-header bg-success">فرم افزودن کالای خراب</div>
+                <div  class="card-header bg-success">فرم افزودن کالای خراب</div>
 
                 <div class="card-body">
                     
 
 
-                <form method="POST" dir="rtl" action="{{ route('login') }}">
+                <form id="form" method="POST" dir="rtl" action="{{ route('add') }}">
                         @csrf
                         <div class="row py-3">
-                            <div class="form-group row col-lg-6 ">
+                            <div  class="form-group row col-lg-12 ">
+                                <label for="p_id" class="col-lg-2 col-form-label text-md-right">شماره دستگاه:</label>
+
+                                <div class="col-lg-10">
+                                    <label id="id"> {{$id}} </label>
+                                </div>
+                            </div>
+                            <div id="fullname" class="form-group row col-lg-6 ">
                                 <label for="name" class="col-lg-3 col-form-label text-md-right">نام مشتری</label>
 
                                 <div class="col-lg-9">
@@ -52,14 +50,14 @@ main{
                                 <label for="model" class="col-lg-3 col-form-label text-md-right ">مدل</label>
 
                                 <div class="col-lg-9">
-                                    <input id="model" type="text" class="form-control @error('model') is-invalid @enderror" name="model" value="{{ old('model') }}" required autocomplete="model"  autofocus>
+                                    <input id="model"class="form-control @error('model') is-invalid @enderror" name="model" value="{{ old('model') }}"  autocomplete="model"  autofocus>
                                 </div>
                             </div>
                             <div class="form-group row col-lg-4 ">
-                                <label for="phone" class="col-lg-5 col-form-label text-md-right">شماره سریال</label>
+                                <label for="serie" class="col-lg-5 col-form-label text-md-right">شماره سریال</label>
 
                                 <div class="col-lg-7">
-                                    <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}"  autocomplete="phone" autofocus>
+                                    <input id="serie" type="number" class="form-control @error('serie') is-invalid @enderror" name="serie" value="{{ old('serie') }}"  autocomplete="serie" autofocus>
                                 </div>
                             </div>
                         </div>  
@@ -76,7 +74,7 @@ main{
                                 <label for="address" class="col-lg-2 col-form-label text-md-right">آدرس</label>
 
                                 <div class="col-lg-10">
-                                    <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}"  autocomplete="address" autofocus>                                </div>
+                                    <input id="address"  class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}"  autocomplete="address" autofocus>                                </div>
                             </div>
                         </div>  
                         <div class="row py-3">
@@ -85,7 +83,7 @@ main{
                                 <label for="truble" class="col-lg-4 col-form-label text-md-right ">اطلاعات خرابی</label>
 
                                 <div class="col-lg-8">
-                                    <textarea id="truble" type="text" class="form-control @error('truble') is-invalid @enderror" name="truble" value="{{ old('truble') }}"  autocomplete="truble" autofocus></textarea>
+                                    <textarea id="truble" class="form-control @error('truble') is-invalid @enderror" name="truble" value="{{ old('truble') }}"  autocomplete="truble" autofocus></textarea>
                                 </div>
                             </div>
                             <div class="form-group row col-lg-6 ">
@@ -102,7 +100,7 @@ main{
                                 <label for="other_information" class="col-lg-2 col-form-label text-md-right ">اطلاعات تکمیلی</label>
 
                                 <div class="col-lg-10">
-                                    <textarea id="other_information" type="text" class="form-control @error('other_information') is-invalid @enderror" name="other_information" value="{{ old('other_information') }}"  autocomplete="other_information" autofocus></textarea>
+                                    <textarea id="other_information" class="form-control @error('other_information') is-invalid @enderror" name="other_information" value="{{ old('other_information') }}"  autocomplete="other_information" autofocus></textarea>
                                 </div>
                             </div>
                          </div>  
@@ -122,31 +120,39 @@ main{
                                 </div>
                             </div>
                          </div>
+                         <div class="form-group row col-lg-12 ">
+                            <label for="p_id" class="col-lg-2 col-form-label text-md-right">تحویل گیرنده:</label>
 
+                            <div class="col-lg-0 pt-2">
+                                <label > {{$username}} </label>
+                            </div>
+                        </div>
+                         <div class="row py-3 " dir="ltr" >
+                            <button type="button" onclick="printDiv()" name="submit" class="btn btn-success offset-1 col-lg-2">افزودن و چاپ</button>
+                         </div>
+    
                     </form>
 
-                    <div class="row py-3 ">
-                        <button type="submit" name="submit" class="btn btn-success offset-1 col-lg-2">افزودن</button>
-                     </div>
-
+                  
 
                 </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="card" >
-                <div class="card-header ">منو</div>
+                <script> 
+                function btn(){
 
-                <div class="card-body">
-                    <a class="btn btn-primary col-lg-12 mt-1" href="#">داشبورد </a>
-                    <a class="btn btn-success col-lg-12 mt-1" href="#">افزودن کالای خراب </a>
-                    <a class="btn btn-primary col-lg-12 mt-1" href="#">مدیریت کالاها </a>
-                    <a class="btn btn-primary col-lg-12 mt-1" href="#">آرشیو کالاها </a>
+                }
+                    function printDiv() { 
+                        document.getElementById("form").submit(); 
 
-                </div>
-            </div>
-        </div>
-    </div>
-    
-</div>
+                        var divContents1 = document.getElementById("id").outerHTML; 
+                        var divContents2 = document.getElementById("name").value; 
+                        var a = window.open('', '', 'height=750, width=500'); 
+                        a.document.write('<html>'); 
+                        a.document.write('<body dir="rtl"> <h1 class="text-center" style="margin-right:35%">فرمهر رایانه<br>'); 
+                        a.document.write('<lable>شناسه دستگاه : ' + divContents1 + '</lable><br>'); 
+                        a.document.write('<lable>نام مشتری : ' + divContents2 + '</lable>'); 
+                        a.document.write('</body></html>'); 
+                        a.document.close(); 
+                        a.print(); 
+                    } 
+                </script> 
 @endsection
