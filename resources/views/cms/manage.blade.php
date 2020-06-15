@@ -27,13 +27,13 @@
                 <td>{{ $item->getter_name}}</td>
                 <td>{{ $item->get_date}}</td>
                 <td>{{ $item->situation_name}}</td>
-                <td><a href="/edit?id={{ $item->id}}"><i class="fa fa-edit text-primary" style="font-size: 30px;"></i></a></td> 
+                <td><a href="/edit/{{ $item->id}}"><i class="fa fa-edit text-primary" style="font-size: 30px;"></i></a></td> 
                 <td><a href="#"><i class="fa fa-wrench text-primary" data-toggle="modal" data-target="#d-{{ $item->id}}" style="font-size: 30px;"></i></a></td> 
                 <td><a href="#"><i class="fa fa-check text-primary" data-toggle="modal" data-target="#dd-{{ $item->id}}" style="font-size: 30px;"></i></a></td> 
             </tr>
             <div class="modal fade" id="d-{{ $item->id}}" tabindex="-1" role="dialog" dir="rtl">
                 <div class="modal-dialog" role="document">
-                <form method="POST" action="{{ route("changeSituation")}}" >
+                <form method="POST" action="{{ route('changeSituation')}}" >
                     @csrf
                     <input name="id" type="hidden" value="{{ $item->id}}">
                     <div class="modal-content">
@@ -48,16 +48,16 @@
                                 تعیین وضعیت دستگاه :
                             </p>
                             <div class="form-check">
-                                <input type="radio" class="form-check-input " id="materialUnchecked" name="situation" value="1">
+                                <input type="radio" class="form-check-input " {{($item->situation==1 ? "checked" : "")}} id="materialUnchecked" name="situation" value="1">
                                 <label class="form-check-label  mr-3" for="materialUnchecked">تعمیر انجام شد</label>
                                 {{-- {{ ($item->situation == 1) ? 'active' : ''}} --}}
                             </div>
                             <div class="form-check">
-                                <input type="radio" class="form-check-input" id="materialUnchecked" name="situation"  value="2">
+                                <input type="radio" class="form-check-input" {{($item->situation==2 ? "checked" : "")}} id="materialUnchecked" name="situation"  value="2">
                                 <label class="form-check-label mr-3" for="materialUnchecked">تعمیر انجام نشد</label>
                             </div>
                             <div class="form-check">
-                                <input type="radio" class="form-check-input" id="materialUnchecked" name="situation"  value="3">
+                                <input type="radio" class="form-check-input" {{($item->situation==3 ? "checked" : "")}} id="materialUnchecked" name="situation"  value="3">
                                 <label class="form-check-label mr-3" for="materialUnchecked">در حال تعمیر</label>
                             </div>
                             <div class="form-group mt-3 row">
@@ -75,7 +75,7 @@
               </div>
               <div class="modal fade" id="dd-{{ $item->id}}" tabindex="-1" role="dialog" dir="rtl">
                 <div class="modal-dialog" role="document">
-                <form method="POST" action="{{ route("exit")}}" >
+                <form method="POST" action="{{ route('exit')}}" >
                     @csrf
                     <input name="id" type="hidden" value="{{ $item->id}}">
                     <div class="modal-content">

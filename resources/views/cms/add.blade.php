@@ -90,7 +90,27 @@
                                 <label for="accessories" class="col-lg-3 col-form-label text-md-right">تجهیزات جانبی</label>
 
                                 <div class="col-lg-9">
-                                    <textarea id="accessories" class="form-control @error('accessories') is-invalid @enderror" name="accessories" value="{{ old('accessories') }}"  autocomplete="accessories" autofocus></textarea>
+                                    <div class="input-group mb-3">
+                                        <input type="checkbox" name="charger" aria-label="Checkbox for following text input">
+                                        <i class="mr-2">شارژر</i>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="checkbox" name="bag" aria-label="Checkbox for following text input">
+                                        <i class="mr-2">کیف</i>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="checkbox" name="dvd" aria-label="Checkbox for following text input">
+                                        <i class="mr-2">دی وی دی</i>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="checkbox" name="monitor" aria-label="Checkbox for following text input">
+                                        <i class="mr-2">مانیتور</i>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="checkbox" name="printer" aria-label="Checkbox for following text input">
+                                        <i class="mr-2">پرینتر</i>
+                                    </div>
+                                  
                                 </div>
                             </div>
                         </div>
@@ -127,10 +147,10 @@
                                 <label > {{$username}} </label>
                             </div>
                         </div>
-                         <div class="row py-3 " dir="ltr" >
-                            <button type="submit" onclick="printDiv()" name="submit" class="btn btn-success offset-1 col-lg-2">افزودن و چاپ</button>
+                         <div class="row py-4 " dir="ltr" >
+                            <button type="submit"  name="submit" class="btn btn-success  col-lg-2">افزودن</button>
+                            <button type="button" onclick="printDiv()" name="submit" class="btn btn-dark offset-8 col-lg-2">چاپ</button>
                          </div>
-    
                     </form>
 
                   
