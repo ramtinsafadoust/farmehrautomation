@@ -62,7 +62,7 @@
                             </div>
                             <div class="form-group mt-3 row">
                                 <label class="col-4">شرح کار انجام شده:</label>
-                                <textarea class="form-control col-8" name="situation_text"></textarea>
+                            <textarea class="form-control col-8" name="situation_text">{{$item->situation_text}}</textarea>
                             </div>
                         </div>
                         <div class="modal-footer">

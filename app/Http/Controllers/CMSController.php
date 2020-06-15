@@ -15,8 +15,11 @@ class CMSController extends Controller
     } 
     public function showAdd(Request $r){
         $user = auth()->user()->fullname;
-        $id =Customer::latest()->first()->id;
-        return view("cms.add")->with(['username' => $user,'id' => $id+1]);
+        if(Customer::latest()->first() !== null)
+            $id =Customer::latest()->first()->id;
+        else
+            $id=0;
+        return view("cms.add")->with(['username' => $user,'id' => $id+1,'route' => 'add']);
     }
     public function add(Request $r){
         $r->validate([
@@ -60,7 +63,7 @@ class CMSController extends Controller
 
     public function showManage(){
 
-        $customers = Customer::select(['id','name','type','model','get_date','situation','getter_id'])->where('situation','<','4')->paginate(10);
+        $customers = Customer::select(['id','name','type','model','get_date','situation_text','situation','getter_id'])->where('situation','<','4')->paginate(10);
         foreach ($customers as $key => $customer) {
             # code...
             switch ($customer->situation) {
@@ -94,7 +97,7 @@ class CMSController extends Controller
                 $customer->getter_name = User::find($customer->getter_id)->fullname;
             }
         }
-        return view('cms.manage')->with('data',$customers);
+        return view('cms.manage')->with(['data'=>$customers,'route' => 'manage']);
     }
     
     public function showArchive(){
@@ -133,8 +136,18 @@ class CMSController extends Controller
                 $customer->getter_name = User::find($customer->getter_id)->fullname;
             }
         }
-        return view('cms.manage')->with('data',$customers);
+        return view('cms.manage')->with(['data'=>$customers,'route' => 'archive']);
     }
+
+
+
+    public function showEdit($id,Request $r){
+        $customer = Customer::find($id);
+        dd($custome->id)
+        return view('cms.edit')->with(['data'=>$customer,'route' => 'manage']);
+    }
+
+
 
     public function changeSituation(Request $r){
         
@@ -150,6 +163,7 @@ class CMSController extends Controller
         
         $customer = Customer::find($r->id);
         $customer->situation = 4;
+        $customer->giver_id=auth()->user()->id;
         $customer->save();
         return redirect('/manage');
         // $customer->situation

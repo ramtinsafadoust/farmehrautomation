@@ -27,6 +27,10 @@ Route::post('/exit', 'CMSController@exit')->name('exit');
 
 Route::get('/manage', 'CMSController@showManage')->name('manage');
 Route::get('/archive', 'CMSController@showArchive')->name('archive');
+Route::get('/dashboard', 'CMSController@showDashboard')->name('dashboard');
+Route::get('/edit/{id}', 'CMSController@showEdit');
+Route::post('/edit/{id}', 'CMSController@edit')->name('edit');
+
 
 
 
